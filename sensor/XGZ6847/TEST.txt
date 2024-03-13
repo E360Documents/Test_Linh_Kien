@@ -1,0 +1,27 @@
+#include <Wire.h>
+
+#define XGZP6847_ADDRESS 0x28 // địa chỉ của cảm biến XGZP6847 trên I2C bus
+
+void setup() {
+  Serial.begin(9600); // khởi tạo Serial communication
+  Wire.begin(); // khởi tạo I2C communication
+}
+
+void loop() {
+  Wire.beginTransmission(XGZP6847_ADDRESS); // bắt đầu gửi yêu cầu đọc dữ liệu từ cảm biến
+  Wire.write(0x10); // gửi yêu cầu đọc giá trị áp suất
+  Wire.endTransmission();
+
+  delay(100); // đợi cho cảm biến hoàn thành quá trình đo
+
+  Wire.requestFrom(XGZP6847_ADDRESS, 2); // yêu cầu đọc 2 byte dữ liệu từ cảm biến
+  if (Wire.available() == 2) {
+    int pressure = Wire.read() << 8 | Wire.read(); // đọc giá trị áp suất từ 2 byte dữ liệu
+
+    Serial.print("Pressure: ");
+    Serial.print(pressure);
+    Serial.println(" Pa");
+  }
+
+  delay(1000); // đợi 1 giây trước khi đọc giá trị áp suất lần tiếp theo
+}
