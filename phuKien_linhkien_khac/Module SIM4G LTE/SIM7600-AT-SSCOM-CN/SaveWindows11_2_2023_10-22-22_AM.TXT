@@ -1,0 +1,11 @@
+Your Windows system is English.In order to avoid the garbled,Please change language:
+Control panel / regional and language / management / non Unicode program language / change system regional language settings: Chinese (simplified, China)
+
+
+正在打开串口...
+
++CMTI: "SM",6
+
++CMTI: "SM",7
+
++CMTI: "SM",8
